@@ -1,271 +1,178 @@
-# 🤖 AI Resume Score
+# 🤖 SmartResumeAI
 
-AI Resume Score is a full-stack resume evaluation platform that compares a candidate's resume with a Job Description (JD) and generates an AI-powered evaluation.
+> AI-powered full-stack resume analyzer that compares resumes with job descriptions and generates ATS-focused insights.
 
-Users can upload a PDF resume, provide a Job Description, and receive an **overall match score, ATS compatibility score, matched skills, missing skills, strengths, and actionable improvement suggestions**.
-
-The application also provides **Google/Firebase authentication, evaluation history, and an admin dashboard** for viewing resume evaluation statistics.
+SmartResumeAI lets candidates upload a PDF resume, enter a target Job Description, and receive an AI-generated evaluation with **overall match score, ATS score, matched skills, missing skills, strengths, and improvement suggestions**.
 
 ## ✨ Features
 
-### 👤 User Features
-
+### 👤 Candidate
 - 🔐 Google authentication with Firebase
-- 📄 Upload resume in PDF format
-- 📝 Enter a Job Description for comparison
-- 🤖 AI-powered resume evaluation using Cohere
+- 📄 PDF resume upload
+- 📝 Job Description input
+- 🤖 Cohere-powered AI evaluation
 - 📊 Overall resume/job match score
 - 🎯 ATS compatibility score
-- ✅ Matched skills detection
-- ❌ Missing skills/keywords detection
-- 💪 Candidate strengths
-- 💡 Actionable resume improvement suggestions
-- 🕒 View previous resume evaluations
-- 🔍 Open detailed evaluation reports
-- 🗑️ Delete previous evaluations
+- ✅ Matched skills
+- ❌ Missing skills
+- 💪 Strengths
+- 💡 Actionable improvements
+- 🕒 Analysis history
+- 🔍 Detailed reports
+- 🗑️ Delete previous analyses
 
-### 🛡️ Admin Features
-
-- 👥 Access user records
-- 📊 View overall resume evaluation statistics
-- 📈 Average resume score
+### 🛡️ Admin
+- 👥 View users
+- 📋 View all resume evaluations
+- 📊 Total resumes analyzed
+- 📈 Average overall score
 - 🎯 Average ATS score
-- 🔥 Count of high-match resumes
-- 📋 View all resume evaluation records
+- 🔥 High-match resume count
 
 ## 🧠 How It Works
 
 ```text
-                 User
-                   │
-                   ▼
-          Login with Google
-          (Firebase Auth)
-                   │
-                   ▼
-          Upload Resume PDF
-                   │
-                   ▼
-         Enter Job Description
-                   │
-                   ▼
-        React Frontend (Vite)
-                   │
-                   ▼
-       Node.js + Express API
-                   │
-          ┌────────┴────────┐
-          ▼                 ▼
-     PDF Parsing       MongoDB/Mongoose
-          │                 │
-          ▼                 │
-      Cohere AI             │
-          │                 │
-          └────────┬────────┘
-                   ▼
-             AI Evaluation
-                   │
-                   ▼
-      ┌──────────────────────────┐
-      │ Overall Score             │
-      │ ATS Score                 │
-      │ Matched Skills            │
-      │ Missing Skills            │
-      │ Strengths                 │
-      │ Improvements              │
-      └──────────────────────────┘
-                   │
-                   ▼
-          Dashboard / History
+Resume PDF + Job Description
+            │
+            ▼
+     React + Vite Frontend
+            │
+            ▼
+    Node.js + Express API
+            │
+       ┌────┴────┐
+       ▼         ▼
+   PDF Parser  MongoDB
+       │       / Mongoose
+       ▼
+    Cohere AI
+       │
+       ▼
+  Resume Analysis
+       │
+       ├── Overall Score
+       ├── ATS Score
+       ├── Matched Skills
+       ├── Missing Skills
+       ├── Strengths
+       └── Improvements
 ```
 
 ## 🛠️ Tech Stack
 
-### Frontend
+**Frontend:** React 19, Vite, JavaScript, React Router, Axios, Material UI, Firebase Authentication, CSS/CSS Modules
 
-- React 19
-- Vite
-- JavaScript (ES Modules)
-- React Router
-- Axios
-- Material UI (MUI)
-- Firebase Authentication
-- CSS / CSS Modules
+**Backend:** Node.js, Express.js, MongoDB, Mongoose, Cohere AI, Multer, pdf-parse, Firebase Admin, CORS, dotenv
 
-### Backend
-
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- Cohere AI
-- Multer
-- pdf-parse
-- CORS
-- dotenv
-- Firebase / Firebase Admin
-
-### Development Tools
-
-- Git
-- GitHub
-- VS Code
-- Nodemon
+**Tools:** Git, GitHub, VS Code, Nodemon
 
 ## 📁 Project Structure
 
 ```text
-AI-Resume_Score/
+SmartResumeAI/
 │
 ├── Backened_ai/
 │   ├── Controllers/
 │   │   ├── resume.js
 │   │   └── user.js
-│   │
 │   ├── Models/
 │   │   ├── resume.js
 │   │   └── user.js
-│   │
 │   ├── Routes/
 │   │   ├── resume.js
 │   │   └── user.js
-│   │
 │   ├── Utils/
 │   │   └── multer.js
-│   │
 │   ├── middleware/
 │   │   ├── auth.js
 │   │   └── adminOnly.js
-│   │
 │   ├── Build/
-│   │   └── index.html
-│   │
 │   ├── uploads/
-│   │   └── Uploaded PDF resumes
-│   │
 │   ├── conn.js
 │   ├── index.js
 │   ├── package.json
-│   ├── package-lock.json
-│   └── .env.example
+│   └── package-lock.json
 │
 ├── ai_resume/
 │   ├── public/
-│   │   ├── favicon.svg
-│   │   └── icons.svg
-│   │
 │   ├── src/
 │   │   ├── component/
 │   │   │   ├── Admin/
-│   │   │   │   ├── Admin.jsx
-│   │   │   │   └── Admin.module.css
-│   │   │   │
 │   │   │   ├── Dashboard/
-│   │   │   │   ├── Dashboard.jsx
-│   │   │   │   └── Dashboard.module.css
-│   │   │   │
 │   │   │   ├── History/
-│   │   │   │   ├── History.jsx
-│   │   │   │   └── History.module.css
-│   │   │   │
 │   │   │   ├── Login/
-│   │   │   │   ├── Login.jsx
-│   │   │   │   └── Login.module.css
-│   │   │   │
 │   │   │   └── SideBar/
-│   │   │       ├── SideBar.jsx
-│   │   │       └── SideBar.module.css
-│   │   │
 │   │   ├── utils/
 │   │   │   ├── HOC/
-│   │   │   │   └── withAuthHOC.jsx
 │   │   │   ├── AuthContext.jsx
 │   │   │   ├── AuthProvider.jsx
 │   │   │   ├── axios.js
 │   │   │   └── firebase.jsx
-│   │   │
 │   │   ├── assets/
-│   │   │   └── hero.png
-│   │   │
 │   │   ├── App.jsx
 │   │   ├── App.css
 │   │   ├── main.jsx
 │   │   └── index.css
-│   │
 │   ├── index.html
 │   ├── package.json
 │   ├── package-lock.json
-│   ├── vite.config.js
-│   └── .env.example
+│   └── vite.config.js
 │
 ├── .gitignore
 ├── TODO.md
 └── README.md
 ```
 
-> **Note:** Generated/dependency directories such as `node_modules` are intentionally not included in the documented project structure.
+## 🔌 API Endpoints
 
-## 🔌 Backend API
+### User
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/user/register` | Register user |
+| POST | `/api/user/` | Login |
+| GET | `/api/user/` | Admin user records |
 
-The backend exposes two main route groups:
+### Resume
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/resume/addResume` | Upload and analyze resume |
+| GET | `/api/resume/get/:user` | Get user history |
+| GET | `/api/resume/get` | Admin evaluations |
+| DELETE | `/api/resume/:id` | Delete evaluation |
 
-### User Routes
+Health check:
 
 ```text
-POST /api/user/register
-POST /api/user/
-GET  /api/user/
+GET /api/health
 ```
 
-### Resume Routes
+## 📊 Evaluation Output
 
-```text
-POST   /api/resume/addResume
-GET    /api/resume/get/:user
-GET    /api/resume/get
-DELETE /api/resume/:id
-```
-
-The resume upload endpoint accepts a PDF file and a Job Description, then processes the resume and stores the evaluation result.
-
-## 📊 Resume Evaluation Output
-
-Each evaluation can contain:
-
-| Field | Description |
+| Result | Description |
 |---|---|
-| Overall Score | Overall candidate/job match score from 0–100 |
-| ATS Score | ATS keyword and formatting compatibility score |
-| Summary | AI-generated executive summary |
-| Skills Matched | Skills found in both resume and job requirements |
-| Skills Missing | Important skills/keywords missing from the resume |
-| Strengths | Candidate strengths identified from the resume |
-| Improvements | Actionable recommendations for resume optimization |
+| Overall Score | Resume and job-description match |
+| ATS Score | ATS-oriented keyword/format compatibility |
+| Summary | AI-generated candidate-fit summary |
+| Matched Skills | Skills found in resume and requirements |
+| Missing Skills | Important missing skills/keywords |
+| Strengths | Strong areas identified by AI |
+| Improvements | Actionable resume recommendations |
 
-## 🔐 Authentication & Authorization
+Scores are normalized to a **0–100** range by the backend.
 
-The frontend uses **Firebase Authentication with Google** for user login.
+## 🔐 Authentication
 
-The backend uses authentication middleware and supports two roles:
-
-- `user`
-- `admin`
-
-Protected resume operations require authentication, while administrative resume statistics and user records require admin authorization.
+- Firebase Google Authentication
+- Backend authentication middleware
+- `user` and `admin` roles
+- Admin-only authorization
+- User-specific resume history
 
 ## ⚙️ Environment Variables
 
-Create the required environment files locally.
+Create local environment files and **never commit secrets**.
 
-### Backend
-
-Create:
-
-```text
-Backened_ai/.env
-```
-
-Example:
+### Backend — `Backened_ai/.env`
 
 ```env
 PORT=4000
@@ -274,134 +181,111 @@ COHERE_API_KEY=your_cohere_api_key
 CLIENT_URL=http://localhost:5173
 ```
 
-### Frontend
-
-Create:
-
-```text
-ai_resume/.env
-```
-
-Example:
+### Frontend — `ai_resume/.env`
 
 ```env
 VITE_API_BASE_URL=http://localhost:4000
 ```
 
-Use the variable names required by the current source code and never commit private credentials or API secrets.
-
 ## 🚀 Getting Started
 
-### 1. Clone the Repository
+### Clone
 
 ```bash
-git clone https://github.com/bhupendrar1/AI-Resume_Score.git
-cd AI-Resume_Score
+git clone https://github.com/bhupendrar1/SmartResumeAI.git
+cd SmartResumeAI
 ```
 
-### 2. Install Backend Dependencies
+### Backend
 
 ```bash
 cd Backened_ai
 npm install
-```
-
-Create your backend `.env` file and configure MongoDB, Cohere, and other required values.
-
-Start the backend:
-
-```bash
 npm start
 ```
 
-The backend runs on port `4000` by default.
+Backend runs on port **4000** by default.
 
-### 3. Install Frontend Dependencies
+### Frontend
 
-Open a new terminal:
+Open another terminal:
 
 ```bash
 cd ai_resume
 npm install
-```
-
-Create the frontend `.env` file if required.
-
-Start the frontend:
-
-```bash
 npm run dev
 ```
 
-Vite will provide the local development URL in the terminal, normally:
+Vite normally runs the frontend at:
 
 ```text
 http://localhost:5173
 ```
 
-## 🔄 Main User Flow
+## 🔄 User Flow
 
-1. Open the application.
-2. Sign in using Google.
-3. Go to the Dashboard.
-4. Upload a PDF resume.
-5. Enter the target Job Description.
-6. Click **Analyze**.
-7. The backend extracts the resume text.
-8. Cohere AI evaluates the resume against the Job Description.
-9. The result is stored in MongoDB.
-10. View the score and recommendations on the Dashboard.
-11. Review previous evaluations from **History**.
+1. Sign in with Google.
+2. Open Dashboard.
+3. Upload a PDF resume.
+4. Enter the target Job Description.
+5. Start analysis.
+6. PDF text is extracted by the backend.
+7. Cohere evaluates the resume against the JD.
+8. Results are stored in MongoDB.
+9. Review scores, skills, strengths, and improvements.
+10. View previous analyses in History.
 
-## 📈 Admin Dashboard
+## 📱 Frontend Pages
 
-The admin section provides an overview of stored resume evaluations, including:
-
-- Total resumes analyzed
-- Average overall score
-- Average ATS score
-- High-match resume count
-- Complete evaluation records
+- **Login** — Google authentication
+- **Dashboard** — Upload resume and view AI analysis
+- **History** — Previous evaluations
+- **Admin** — Statistics and evaluation records
+- **SideBar** — Application navigation
 
 ## 🎯 Project Highlights
 
-This project demonstrates practical experience with:
-
 - Full-stack MERN development
-- React component-based architecture
-- Vite frontend tooling
+- React component architecture
 - REST API development
-- MongoDB and Mongoose
-- PDF file upload and text extraction
+- MongoDB/Mongoose integration
+- PDF upload and text extraction
 - Generative AI integration with Cohere
-- Firebase Google authentication
-- Authentication and role-based authorization
-- Resume-to-job-description matching
-- ATS-oriented resume analysis
-- Persistent evaluation history
+- Firebase authentication
+- Role-based authorization
+- Resume-to-JD matching
+- ATS-oriented analysis
+- Persistent history
 - Admin analytics
-- Environment-based configuration
 
 ## 🔮 Future Improvements
 
-- 🎯 Job-specific resume optimization
-- 🔑 More robust role and permission management
-- 📄 Export detailed evaluation reports as PDF
-- 📊 Advanced analytics and visualizations
-- 💼 Job recommendations based on resume skills
-- 🔍 Improved ATS keyword and semantic matching
-- ☁️ Cloud storage for uploaded resumes
-- 🚀 Production deployment and CI/CD
-- 🧪 Automated backend and frontend tests
+- Job-specific resume optimization
+- PDF report export
+- Advanced analytics and charts
+- Job recommendations
+- Improved semantic ATS matching
+- Cloud resume storage
+- CI/CD deployment
+- Automated testing
+- Resume templates and optimization suggestions
+
+## 🔒 Security
+
+Before submitting or deploying this project:
+
+- Keep API/database credentials in environment variables.
+- Never commit private credentials.
+- Rotate/revoke any secret that has previously been exposed in Git history.
+- Review uploaded files and generated data before making the repository public.
 
 ## 👨‍💻 Author
 
-**Bhupendra Singh**
-
+**Bhupendra Singh**  
 MERN / Full-Stack Developer
 
 GitHub: [@bhupendrar1](https://github.com/bhupendrar1)
 
 ---
 
-⭐ If you find this project useful, consider giving the repository a star!
+⭐ If you find **SmartResumeAI** useful, consider starring the repository.
