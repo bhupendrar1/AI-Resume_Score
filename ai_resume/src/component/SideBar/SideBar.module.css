@@ -1,41 +1,76 @@
-.sideBar{
-    flex: 0.2;
-    background-color: #0b0b5a;
+.sideBar {
+    width: 260px;
+    background: linear-gradient(180deg, #0f172a 0%, #090d16 100%);
     color: white;
-    height: 100vh;
+    min-height: 100vh;
     flex-shrink: 0;
-}
-
-.sideBarIcon{
-    padding: 20px 30px;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    box-sizing: border-box;
 }
 
-.sideBarTopContent{
-    font-size: 26px;
-}
-
-.sideBarOptionsBlock{
-    margin-top: 30px;
-
-}
-
-
-.sideBarOption{
-    padding: 20px;
+.sideBarIcon {
+    padding: 30px 24px 20px;
     display: flex;
-    gap: 10px;
     align-items: center;
-    font-size: 22px;
-    cursor: pointer;
-    color: white;
-    text-decoration: none;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.selectedOption{
-    background-color: rgb(72, 72, 222);
+.sideBarTopContent {
+    font-size: 20px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 40%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
+.sideBarOptionsBlock {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0 14px;
+}
+
+.sideBarOption {
+    padding: 14px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #94a3b8;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.sideBarOption:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+}
+
+.selectedOption {
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.25), rgba(168, 85, 247, 0.2));
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    color: #ffffff !important;
+}
+
+@media screen and (max-width: 780px) {
+    .sideBar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .sideBarOptionsBlock {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding-bottom: 14px;
+    }
 }

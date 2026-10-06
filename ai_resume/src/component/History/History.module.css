@@ -1,9 +1,9 @@
 .History {
-    flex: 0.8;
-    height: 100vh;
-    overflow: auto;
-    padding: 50px;
-    background-color: whitesmoke;
+    flex: 1;
+    min-height: 100vh;
+    overflow-y: auto;
+    padding: 40px;
+    background-color: #f1f5f9;
     box-sizing: border-box;
 }
 
@@ -11,7 +11,7 @@
     width: 100%;
     display: grid;
     gap: 20px;
-    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .HistoryCard {

@@ -1,11 +1,11 @@
 .Dashboard {
-    flex: 0.8;
-    height: 100vh;
-    overflow: auto;
-    padding: 50px;
+    flex: 1;
+    min-height: 100vh;
+    overflow-y: auto;
+    padding: 40px;
     display: flex;
     justify-content: space-between;
-    background-color: whitesmoke;
+    background-color: #f1f5f9;
     box-sizing: border-box;
 }
 

@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://bs4004908_db_user:RojkYoWsX0RatcmI@cluster0.uxbza3s.mongodb.net/?appName=Cluster0').then((res)=> {
-    console.log('Database Connected Successfully');
-}).catch((err)=>{
-    console.log('Database Connection Failed', err);
-})
+const connectDB = async () => {
+    try {
+        const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/resume_screening';
+        await mongoose.connect(uri);
+        console.log('✅ Database Connected Successfully');
+    } catch (err) {
+        console.error('❌ Database Connection Failed:', err.message);
+    }
+};
 
+module.exports = connectDB;

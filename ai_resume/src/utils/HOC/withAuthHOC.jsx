@@ -1,25 +1,26 @@
-import { useEffect, useContext} from "react"
-import { useNavigate } from "react-router-dom"
-import { AuthContext } from "../AuthContext"
+import { useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../AuthContext';
 
-const WithAuthHOC = (WrappedComponent)=>{
-    
-    return (props)=>{
-        const navigate = useNavigate();
-        const {setLogin} = useContext(AuthContext);
-        useEffect(()=>{
-            const isLogin = localStorage.getItem('isLogin');
+const WithAuthHOC = (WrappedComponent) => {
+  return function ProtectedRoute(props) {
+    const navigate = useNavigate();
+    const { isLogin } = useContext(AuthContext);
 
-            if(!isLogin){
-                setLogin(false);
-                navigate('/')
+    useEffect(() => {
+      const storedLogin = localStorage.getItem('isLogin') === 'true';
+      if (!isLogin && !storedLogin) {
+        navigate('/');
+      }
+    }, [isLogin, navigate]);
 
-                return;
-            }
-        },[navigate])
-
-        return <WrappedComponent {...props} />;
+    const storedLogin = localStorage.getItem('isLogin') === 'true';
+    if (!isLogin && !storedLogin) {
+      return null;
     }
-}
+
+    return <WrappedComponent {...props} />;
+  };
+};
 
 export default WithAuthHOC;

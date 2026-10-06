@@ -1,31 +1,26 @@
-import './App.css'
-import SideBar from './component/SideBar/SideBar'
-import {Routes, Route} from 'react-router-dom';
+import './App.css';
+import SideBar from './component/SideBar/SideBar';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Dashboard from './component/Dashboard/Dashboard';
 import History from './component/History/History';
-import Admin from  './component/Admin/Admin';
+import Admin from './component/Admin/Admin';
 import Login from './component/Login/Login';
 
-
-
-
 function App() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/';
 
   return (
-    <>
-    <div className='App'>
-      <SideBar /> 
+    <div className="App">
+      {!isLoginPage && <SideBar />}
       <Routes>
-      <Route path='/dashboard' element={<Dashboard/>} />
-      <Route path='/history' element={<History/>} />
-      <Route path='/admin' element={<Admin/>} />
-      <Route path='/' element={<Login/>} />
-
-    
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
-    </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,51 +1,73 @@
-import styles from './SideBar.module.css'
+import styles from './SideBar.module.css';
 import ArticleIcon from '@mui/icons-material/Article';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import HistoryIcon from '@mui/icons-material/History';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import LogoutIcon from '@mui/icons-material/Logout';
-
-import {Link, useLocation} from 'react-router-dom';
-
-
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../utils/AuthContext';
 
 const SideBar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { userInfo, logoutUser } = useContext(AuthContext);
 
-    const location = useLocation();
-    console.log(location);
-    
-return (
+  const handleLogout = () => {
+    logoutUser();
+    navigate('/');
+  };
+
+  return (
     <div className={styles.sideBar}>
-<div className={styles.sideBarIcon}>
-    <ArticleIcon sx={{fontsize: 54, marginBottom: 2}} />
-    <div className={styles.sideBarTopContent}>Resume Screening</div>
-</div>
+      <div className={styles.sideBarIcon}>
+        <ArticleIcon sx={{ fontSize: 48, marginBottom: 1 }} />
+        <div className={styles.sideBarTopContent}>Resume AI</div>
+      </div>
 
-        <div className={styles.sideBarOptionsBlock}>
-
-        <Link to={'/dashboard'} className={[styles.sideBarOption, location.pathname === '/dashboard' ? styles.selectedOption: null].join(' ')}>
-            <DashboardIcon sx= {{fontsize: 22}} />
-            <div>Dashboard</div>
-        </Link>
-        
-        <Link to={'/history'} className={[styles.sideBarOption, location.pathname === '/history' ? styles.selectedOption: null].join(' ')}>
-            <HistoryIcon sx= {{fontsize: 22}} />
-            <div>History</div>
-        </Link>
-
-        <Link to={'/admin'} className={[styles.sideBarOption, location.pathname === '/admin' ? styles.selectedOption: null].join(' ')}>
-            <SupervisorAccountIcon sx= {{fontsize: 22}} />
-            <div>Admin</div>
+      <div className={styles.sideBarOptionsBlock}>
+        <Link
+          to="/dashboard"
+          className={[
+            styles.sideBarOption,
+            location.pathname === '/dashboard' ? styles.selectedOption : '',
+          ].join(' ')}
+        >
+          <DashboardIcon sx={{ fontSize: 22 }} />
+          <div>Dashboard</div>
         </Link>
 
-        <div className={styles.sideBarOption}>
-            <LogoutIcon sx= {{fontsize: 22}} />
-            <div>Logout</div>
+        <Link
+          to="/history"
+          className={[
+            styles.sideBarOption,
+            location.pathname === '/history' ? styles.selectedOption : '',
+          ].join(' ')}
+        >
+          <HistoryIcon sx={{ fontSize: 22 }} />
+          <div>History</div>
+        </Link>
+
+        {userInfo?.role === 'admin' && (
+          <Link
+            to="/admin"
+            className={[
+              styles.sideBarOption,
+              location.pathname === '/admin' ? styles.selectedOption : '',
+            ].join(' ')}
+          >
+            <SupervisorAccountIcon sx={{ fontSize: 22 }} />
+            <div>Admin Hub</div>
+          </Link>
+        )}
+
+        <div onClick={handleLogout} className={styles.sideBarOption}>
+          <LogoutIcon sx={{ fontSize: 22 }} />
+          <div>Logout</div>
         </div>
-
-        </div>
+      </div>
     </div>
-)
-}
+  );
+};
 
-export default SideBar
+export default SideBar;
